@@ -29,7 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPlusPlusFarey.cpp">
+    <ClCompile Include="CPPFarey.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
