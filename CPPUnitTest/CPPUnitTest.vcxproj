@@ -162,6 +162,11 @@
     </ClCompile>
     <ClCompile Include="CPPUnitTest.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FarceyGenerator\FarceyGenerator.vcxproj">
+      <Project>{92e77550-cc9e-4660-9f65-8b225b0f9359}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
