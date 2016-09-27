@@ -5,35 +5,30 @@
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include "../FarceyGenerator/FareyGenerator.h"
+
 using namespace std;
 
 int main()
 {
 	int i;
+	vector<fraction> fareySet;
+
+	FareyGenerator fareyGenerator;
 
 	while (true)
 	{
-		cin >> i;
+		fareySet.clear();
 
+		cin >> i;
 		if (i<=0) break;
 
 		cout << 0 << "/" << i << endl;
 
-		for (int m = 1; m <= i; m++)
-		{
-			int x = m, y = i;
+		fareyGenerator.FareyGeneration(i, fareySet);
 
-			for (int n = m; n >= 2; n--)
-			{
-				if (((m % n) == 0) && ((i % n) == 0))
-				{
-					x = m / n;
-					y = i / n;
-					break;
-				}
-			}
-
-			cout << x << "/" << y << endl;
+		for (vector<fraction>::iterator it = fareySet.begin(); it != fareySet.end(); ++it) {
+			cout << it->numerator << "/" << it->denominator << endl;
 		}
 	}
 
