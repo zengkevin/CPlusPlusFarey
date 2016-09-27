@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 using namespace std;
 
 struct fraction {
@@ -21,5 +22,6 @@ public:
 
 public:
 	bool FareyGeneration(int base, vector<fraction>& fareyPairs);
+	shared_ptr<fraction> FareyGeneration(int base);
 };
 
