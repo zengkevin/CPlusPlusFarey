@@ -7,8 +7,6 @@
 
 using namespace std;
 
-#define MAX_ROWS 256
-
 void print2dVector(std::vector<std::vector<char>> const &mat) {
     for (vector<char> row: mat) {
         for (char val: row) {
@@ -22,33 +20,26 @@ bool readInPuzzleAndWords(string puzzleFile, string wordFile,
         vector<vector<char>>& board, vector<string>& words) {
     ifstream inFile(puzzleFile, ios::in);
     if(!inFile.is_open()) return false;
-    
+
     string line;
-    char char_array[MAX_ROWS];
-    int i=0;
-    int j=0;
-    while(getline(inFile, line)){
-        strcpy(char_array, line.c_str());
-        
-        //Todo: check strlen(line) is the same for all
-        
-        for (i=0; i<strlen(line.c_str()); i++) {
-            board[j].push_back(char_array[i]);
-        }
-        
-        j++;
+    while(!inFile.eof()) {
+        inFile >> line;
+        vector<char> v( line.begin(), line.end() );
+        board.push_back(v);
     }
     
     inFile.close();
+
+
+    inFile.open(wordFile, ios::in);
     
-    ifstream inFile2(wordFile, ios::in);
-    
-    if(!inFile2.is_open()) return false;
-    while(getline(inFile2, line)){
+    if(!inFile.is_open()) return false;
+    while(!inFile.eof()) {
+        inFile >> line;
         words.push_back(line);
     }
     
-    inFile2.close();
+    inFile.close();
 }
 
 bool writeOutPuzzle(vector<vector<char>> &board, string outputFile) {
@@ -113,9 +104,7 @@ public:
                     }
                     
                     //cout << "Done searching " << word << " at " << row << ", " 
-                    //    << col << " Result: " << endl; 
-                    //for (string &s : result) cout << s << " ";
-                    //cout << '\n';
+                    //    << col << endl; 
                 }
                 
            }
@@ -144,7 +133,7 @@ int main()
 {
     Solution solution;
    
-    vector<vector<char>> board{ {'T','K','J','O','Q','M','I','T','Q','A','E','E'},
+    vector<vector<char>> board; /*{ {'T','K','J','O','Q','M','I','T','Q','A','E','E'},
        {'F','D','S','O','U','X','D','Q','M','E','S','I'},
        {'H','A','C','R','H','N','R','E','T','N','I','V'},
        {'A','R','H','O','I','N','T','E','R','N','Z','A'},
@@ -155,13 +144,13 @@ int main()
        {'H','E','L','L','O','D','L','R','O','W','L','O'},
        {'W','L','S','L','O','D','G','D','O','S','E','J'},
        {'T','M','J','E','Q','Z','L','O','M','W','H','P'},
-       {'L','L','Q','H','Q','T','M','I','W','C','M','A'} };
+       {'L','L','Q','H','Q','T','M','I','W','C','M','A'} };*/
        
-    vector<string> words{"HELLO","WORLD","INTERN"};
+    vector<string> words;//{"HELLO","WORLD","INTERN"};
    
     //If file loading failed, the above data will be used 
     readInPuzzleAndWords("sample_puzzle.txt", "sample_word_list.txt", board, words);
-  
+
     map<pair<int,int>, vector<string>> map2;
     map<string, vector<pair<int,int>>> result = solution.findWords(board, words);
     for(auto elem : result) {
@@ -187,6 +176,6 @@ int main()
     // print the 2D vector
     print2dVector(board);
     writeOutPuzzle(board, "output_puzzle.txt");
-
+ 
    return 0;
 }
