@@ -44,7 +44,7 @@ bool readInPuzzleAndWords(string puzzleFile, string wordFile,
     ifstream inFile2(wordFile, ios::in);
     
     if(!inFile2.is_open()) return false;
-    while(getline(inFile, line)){
+    while(getline(inFile2, line)){
         words.push_back(line);
     }
     
@@ -57,7 +57,7 @@ bool writeOutPuzzle(vector<vector<char>> &board, string outputFile) {
     
     for (vector<char> row: board) {
         string str(row.begin(), row.end());
-        outFile << str;
+        outFile << str <<endl;
     }  
     
     outFile.close();
